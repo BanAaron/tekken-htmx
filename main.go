@@ -23,13 +23,17 @@ func NewPerson(id int, name string, url string) Person {
 
 func main() {
 	aaron := NewPerson(1, "Aaron", "https://google.co.uk")
-	sarah := NewPerson(2, "Sarah", "https://facebook.com")
 
-	_ = godump.Dump(aaron)
-	fmt.Println(aaron, sarah)
+	err := godump.Dump(aaron)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	header := headerTemplate(aaron)
+	hm := homepage()
 	mux := http.NewServeMux()
-	mux.Handle("/", templ.Handler(header))
-	_ = http.ListenAndServe(":3333", mux)
+	mux.Handle("/", templ.Handler(hm))
+	err = http.ListenAndServe(":3333", mux)
+	if err != nil {
+		panic(err)
+	}
 }
