@@ -1,0 +1,11 @@
+package main
+
+script foo(text string) {
+    alert(text)
+}
+
+templ button(text string, attrs templ.Attributes) {
+    <div style="padding-top: 25px">
+        <button { attrs... } onClick={ foo(text) }>{ text }</button>
+    </div>
+}

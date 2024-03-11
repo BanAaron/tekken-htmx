@@ -1,0 +1,13 @@
+package main
+
+import "strings"
+
+var greeting = "Hi"
+
+templ headerTemplate(p Person) {
+	<div>
+		<h1>{ greeting }, { p.Name }!</h1>
+        <a href={ templ.URL(p.Url) }>{ strings.ToUpper(p.Name) }</a>
+        @button(p.Name, templ.Attributes{"background-color": "red"})
+	</div>
+}
